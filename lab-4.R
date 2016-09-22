@@ -115,7 +115,7 @@ prod(dbinom(esp.practice.data$n.correct, 20, 0.6))
 
 # which parameter value of those options is most likely?
 
-0.5 is the most likely value
+#0.5 is the most likely value
 
 # here is a sample of response times for a single subject from a rapid decision making experiment.
 rt.sample <- c(391.5845, 411.9970, 358.6373, 505.3099, 616.2892, 481.0751, 422.3132, 511.7213, 205.2692, 522.3433, 370.1850,
@@ -127,26 +127,27 @@ rt.sample <- c(391.5845, 411.9970, 358.6373, 505.3099, 616.2892, 481.0751, 422.3
 # hint: sum() adds the numbers in a vector. log() is the natural log function, or log=T for dnorm().
 
 # 1) mean 350, sd 50
-# answer needed here.
+sum(dnorm(rt.sample, 350, 50, log=TRUE))
 
 # 2) mean 400, sd 50
-# answer needed here.
+sum(dnorm(rt.sample, 400, 50, log=TRUE))
 
 # 3) mean 450, sd 50
-# answer needed here.
+sum(dnorm(rt.sample, 450, 50, log=TRUE))
 
 # 4) mean 350, sd 100
-# answer needed here.
+sum(dnorm(rt.sample, 350, 100, log=TRUE))
 
 # 5) mean 400, sd 100
-# answer needed here.
+sum(dnorm(rt.sample, 400, 100, log=TRUE))
 
 # 6) mean 450, sd 100
-# answer needed here.
+sum(dnorm(rt.sample, 450, 100, log=TRUE))
 
 # which parameter set has the highest likelihood?
 
-# answer needed here.
+#mean of 400, standard deviation of 100
+
 
 # here is a set of data for a subject in a categorization experiment, modeled with GCM.
 # calculate the log likelihood of the parameters in the model (which i am not showing you).
@@ -159,7 +160,16 @@ gcm.practice.data <- data.frame(correct.response = c(T, T, T, T, F, T, T, F, T, 
                                 gcm.probability.correct = c(0.84, 0.80, 0.84, 0.80, 0.79, 0.86, 0.89, 0.87, 0.69, 0.85, 0.75,
                                                             0.74, 0.82, 0.85, 0.87, 0.69, 0.83, 0.87, 0.80, 0.76))
 
-# answer needed here.
+gcm.practice.data$outcome.prob <- mapply(
+  function(prob, response){
+  if (response = T){
+    return(prob)
+  }else{
+    return(1-prob)
+  }
+}}, gcm.practice.data$gcm.probability.correct, gcm.practice.data$correct.response)
+
+#we need to be returning a part of a vector, but not a vector
 
 #### maximum likelihood estimation ####
 
