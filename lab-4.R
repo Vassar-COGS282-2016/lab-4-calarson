@@ -14,7 +14,7 @@
 # how the function works.
 
 number.of.samples <- 2
-number.of.trials.per.sample <- 10
+number.of.trials.per.sample <- 100
 probability.of.success <- 0.7
 
 rbinom(number.of.samples, number.of.trials.per.sample, probability.of.success)
@@ -26,7 +26,7 @@ rbinom(number.of.samples, number.of.trials.per.sample, probability.of.success)
 # of course, ESP doesn't exist, so the probability of a successful guess is 0.50.
 # store the result in a vector called esp.data
 
-esp.data <- NA # answer needed here.
+esp.data <- rbinom(100, 20, 0.5)
 
 # a quick way to visualize a distribution is with the hist() function:
 hist(esp.data)
