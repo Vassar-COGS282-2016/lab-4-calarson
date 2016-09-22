@@ -45,7 +45,7 @@ dbinom(value.to.check, number.of.trials, probability.of.success)
 # questions correctly, if they have a 0.9 probability of giving a correct answer
 # for each individual question.
 
-# answer needed here.
+dbinom(87, 100, 0.9)
 
 # with dbinom, you can use a vector as the first argument, to check the probability
 # of multiple values at the same time:
@@ -58,7 +58,12 @@ dbinom(values, 8, 0.5)
 # hint: create one vector for the different possible outcomes
 #       then use dbinom to calculate the probability of all of the elements in the vector
 
-# answer needed here.
+
+#a probability mass function plots outcomes on the x, probability of those outcomes on the y
+
+heads<-seq(0, 16)
+prob<-dbinom(heads, 16, 0.50)
+plot(heads,prob)
 
 # quick detour #
 
@@ -80,14 +85,18 @@ hist(hist.sample, xlim=c(0,100)) # compare this plot to the line above.
 # generate 100 samples from a normal distribution with mean 0 and standard deviation 10.
 # then use hist() to create a histogram of these samples.
 
-# answer needed here.
+rnorm.prob<- rnorm(100, 0, 10)
+hist(rnorm.prob)
 
 # now plot the probability density function of this distribution.
 # use the same strategy as you did above with the binomial to find the density of the normal
 # distribution with mean 0 and sd 10 for values between -50 and 50. the distribution is continuous
 # so, choose a reasonably small step size between values (remember the seq() function).
 
-# answer needed here.
+samples<-seq(-50, 50, 0.25)
+prob.density<-dnorm(samples, 0, 10)
+plot(samples, prob.density, type="l")
+
 
 #### practice calculating likelihoods ####
 
@@ -100,11 +109,13 @@ esp.practice.data <- data.frame(subject=1:10, n.correct=c(11,10,6,10,6,12,10,8,9
 # of the probability of success parameter: 0.4, 0.5, and 0.6.
 # hint: prod() will multiple all elements of a vector together.
 
-# answer needed here.
+prod(dbinom(esp.practice.data$n.correct, 20, 0.4))
+prod(dbinom(esp.practice.data$n.correct, 20, 0.5))
+prod(dbinom(esp.practice.data$n.correct, 20, 0.6))
 
 # which parameter value of those options is most likely?
 
-# answer here.
+0.5 is the most likely value
 
 # here is a sample of response times for a single subject from a rapid decision making experiment.
 rt.sample <- c(391.5845, 411.9970, 358.6373, 505.3099, 616.2892, 481.0751, 422.3132, 511.7213, 205.2692, 522.3433, 370.1850,
