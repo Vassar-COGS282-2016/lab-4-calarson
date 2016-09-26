@@ -266,26 +266,42 @@ dnorm(y.observed, y.predicted, 10)
 # write the code to see how likely it is that y will be 33 when x is 29? (assuming sd = 10)
 # the correct answer is 0.03371799...
 
-# answer needed here.
+x.observ <- 29
+y.observ <- 33
+y.predicted <- 4 + 0.8*x.observed
+dnorm(y.observ, y.predicted, 10)
 
 # now generalize your solution to compute the likelihood of each value of y that you generated above.
 # in other words, write the code that takes a vector of x and y values, and returns the probability
 # of each pair given that the relationship between x and y is y <- 4 + 0.8*x and the normal distribution has an sd of 10.
+x<-seq(0,100)
+y.noise.predicted <- 4+ 0.8*x + rnorm(101, 0, 10)
+dnorm(y.noise(x), y.noise.predicted, 10)
 
-# answer needed here.
 
 # now generalize your solution one step further. write a function that takes in a vector of parameters,
 # where parameters[1] is the intercept, parameters[2] is the slope, and parameters[3] is the sd of the normal,
 # and returns the total **negative log likelihood**. remember, we want the negative log likelihood because
 # optim() will find the set of parameters that minimizes a function.
 
-# answer needed here.
+parameter.optimize <- function(parameters){
+  intercept<-parameters[1]
+  slope<-parameters[2]
+  sd<-parameters[3]
+  
+  y.noise.gen<-function(x){return(intercept+ slope*x + rnorm(101, 0, sd))}
+  y.noise.predicted.gen <- intercept+ slope*x + rnorm(101, 0, sd)
+  return(sum(-1*(dnorm(y.noise.gen(x), y.noise.predicted.gen, sd, log = T))))
+  }
+
+
+
 
 # use optim() and Nelder-Mead to search for the best fitting parameters. remember to ensure that sd > 0
 # and return NA if it is not.
-
-# answer needed here.
+parameter.optimize.optim<- optim(c(1,1,1), parameter.optimize, method="Nelder-Mead")
+parameter.optimize.optim$par
+parameter.optimize.optim$value
 
 # finally, plot the best fitting line on your points by using the abline() function, and the parameters that optim() found.
-
-# answer needed here.
+abline(parameter.optimize.optim$par[1], parameter.optimize.optim$par[2])
