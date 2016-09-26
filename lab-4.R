@@ -17,6 +17,7 @@ number.of.samples <- 2
 number.of.trials.per.sample <- 100
 probability.of.success <- 0.7
 
+
 rbinom(number.of.samples, number.of.trials.per.sample, probability.of.success)
 
 # below, use rbinom to create sample data for the following scenario.
