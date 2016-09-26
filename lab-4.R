@@ -160,14 +160,18 @@ gcm.practice.data <- data.frame(correct.response = c(T, T, T, T, F, T, T, F, T, 
                                 gcm.probability.correct = c(0.84, 0.80, 0.84, 0.80, 0.79, 0.86, 0.89, 0.87, 0.69, 0.85, 0.75,
                                                             0.74, 0.82, 0.85, 0.87, 0.69, 0.83, 0.87, 0.80, 0.76))
 
-gcm.practice.data$outcome.prob <- mapply(
+gcm.practice.data$individual.likelihood <- mapply(
   function(prob, response){
-  if (response = T){
+  if (response == T){
     return(prob)
   }else{
     return(1-prob)
   }
-}}, gcm.practice.data$gcm.probability.correct, gcm.practice.data$correct.response)
+}, gcm.practice.data$gcm.probability.correct, gcm.practice.data$correct.response)
+
+gcm.practice.data$log.likelihood <- log(gcm.practice.data$individual.likelihood)
+
+sum(gcm.practice.data$log.likelihood)
 
 #we need to be returning a part of a vector, but not a vector
 
