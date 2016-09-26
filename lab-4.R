@@ -202,8 +202,10 @@ theta<-seq(from=0.5, to = 0.9, by= 0.01)
 same.diff.data.theta <- sapply(theta, same.diff.data.likelihood)
 plot(theta, same.diff.data.theta)
 # the "true" underlying value i used to generate the data was 0.75. does that match up with the grid search?
+max(same.diff.data.theta)
+theta[match(max(same.diff.data.theta), same.diff.data.theta)]
 
-#GO BACK TO GRID SEARCH
+#the max of the grid search is 0.76 so it almost matches
 
 ## mle with optim()
 
